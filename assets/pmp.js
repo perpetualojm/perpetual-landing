@@ -2,7 +2,7 @@
 
 /* ==== TRACKING CONFIG — fill in when IDs are approved; leave "" to disable ==== */
 window.PMP_CONFIG = window.PMP_CONFIG || {
-  META_PIXEL_ID: "",        /* e.g. "1234567890" — Meta Pixel base code auto-injects when set */
+  META_PIXEL_ID: "543241923632489",  /* Meta Pixel — base code auto-injects */
   GA4_MEASUREMENT_ID: ""    /* e.g. "G-XXXXXXX"  — GA4 gtag.js auto-injects when set */
 };
 
