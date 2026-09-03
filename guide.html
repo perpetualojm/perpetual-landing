@@ -22,18 +22,34 @@
   @media(min-width:560px){.hero .btn{width:auto;padding:1em 2em}}
   .note{margin-top:12px;font-size:13px;color:var(--ci-grey)}
   .env-wrap{padding:0 clamp(20px,6vw,64px) clamp(44px,8vw,64px);max-width:680px}
+  .hero-visual{display:none}
+  /* desktop: two-column hero with photography */
+  @media(min-width:900px){
+    .hero{max-width:1120px;margin:0 auto;width:100%}
+    .hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:56px;align-items:center}
+    .hero-visual{display:block;border-radius:22px;overflow:hidden;
+      border:1px solid var(--pmp-line);box-shadow:var(--shadow-panel);margin:0}
+    .hero-visual img{width:100%;aspect-ratio:4/3.4;object-fit:cover;display:block}
+    .env-wrap{max-width:1120px;margin:0 auto;width:100%}
+    .env-band img{aspect-ratio:16/8}
+  }
 </style>
 </head>
 <body class="lattice">
 
 <header class="hero">
   <img class="logo-h" src="assets/Perpetual_Logo_Horizontal.jpg" alt="萬富 Perpetual Memorial Park">
-  <div>
-    <span class="eyebrow">先别急着问价格</span>
-    <h1>第一次看福位，<br>为什么不建议<em>只看价格</em>？</h1>
-    <p>价格当然重要。但地点、环境、类型和家人的实际需求，也会影响最后的选择。</p>
-    <a class="btn btn-primary" id="continue" href="index.html#steps">看看选福位前要了解什么 →</a>
-    <p class="note">4 个步骤，几分钟看完。不用留下任何资料。</p>
+  <div class="hero-grid">
+    <div>
+      <span class="eyebrow">先别急着问价格</span>
+      <h1>第一次看福位，<br>为什么不建议<em>只看价格</em>？</h1>
+      <p>价格当然重要。但地点、环境、类型和家人的实际需求，也会影响最后的选择。</p>
+      <a class="btn btn-primary" id="continue" href="index.html#steps">看看选福位前要了解什么 →</a>
+      <p class="note">4 个步骤，几分钟看完。不用留下任何资料。</p>
+    </div>
+    <figure class="hero-visual" aria-hidden="true">
+      <img src="https://cms.perpetual.com.my/assets/images/heng-ding-lou/_banner1920X1078/22010/1920x1080-HDL-04.webp" alt="">
+    </figure>
   </div>
 </header>
 

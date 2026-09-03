@@ -37,16 +37,31 @@
   tbody tr:last-child th,tbody tr:last-child td{border-bottom:0}
   td{color:var(--ci-grey);line-height:1.65}
   .cmp-note{font-size:12.5px;color:var(--ci-grey);margin-top:12px}
+  .hero-visual{display:none}
+  /* desktop: two-column hero with photography */
+  @media(min-width:900px){
+    .hero{max-width:1120px;margin:0 auto;width:100%}
+    .hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:56px;align-items:center}
+    .hero-visual{display:block;border-radius:22px;overflow:hidden;
+      border:1px solid var(--pmp-line);box-shadow:var(--shadow-panel);margin:0}
+    .hero-visual img{width:100%;aspect-ratio:16/9.5;object-fit:cover;display:block}
+    .section{width:100%}
+  }
 </style>
 </head>
 <body class="lattice">
 
 <header class="hero">
   <img class="logo-h" src="assets/Perpetual_Logo_Horizontal.jpg" alt="萬富 Perpetual Memorial Park">
-  <div>
-    <span class="eyebrow">Kulai · Ulu Choh · Ipoh，应该怎么选？</span>
-    <h1>哪个地点，<br>更适合<em>您的家人</em>？</h1>
-    <p>不是选“最好”的地点，而是选更符合家人需求的位置。</p>
+  <div class="hero-grid">
+    <div>
+      <span class="eyebrow">Kulai · Ulu Choh · Ipoh，应该怎么选？</span>
+      <h1>哪个地点，<br>更适合<em>您的家人</em>？</h1>
+      <p>不是选“最好”的地点，而是选更符合家人需求的位置。</p>
+    </div>
+    <figure class="hero-visual" aria-hidden="true">
+      <img src="https://cms.perpetual.com.my/assets/images/heng-ding-lou/1k_PMP-Garden-Visual-1.jpg" alt="">
+    </figure>
   </div>
 </header>
 

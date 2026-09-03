@@ -52,6 +52,19 @@
   .btn-full{width:100%;font-size:16px;padding:1em}
   .reassure{margin-top:14px;font-size:13.5px;color:var(--ci-grey);text-align:center}
   footer{padding:20px;text-align:center;font-size:12.5px;color:var(--ci-grey)}
+  /* desktop: photo panel on the right, matcher centred in the remaining space */
+  @media(min-width:980px){
+    body{padding-right:38vw}
+    body::before{
+      content:"";position:fixed;top:0;right:0;bottom:0;width:38vw;z-index:0;
+      background:
+        linear-gradient(90deg,var(--pmp-ivory) 0%,rgba(248,246,243,0) 22%),
+        url("https://cms.perpetual.com.my/assets/images/heng-ding-lou/_banner1920X1078/22010/1920x1080-HDL-04.webp") center/cover no-repeat,
+        var(--ci-hero);
+    }
+    .top{padding-top:34px}
+    .stage{justify-content:center}
+  }
 </style>
 </head>
 <body class="lattice">

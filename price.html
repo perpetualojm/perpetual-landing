@@ -34,6 +34,16 @@
     display:flex;flex-wrap:wrap;gap:8px 18px;font-size:13px;color:var(--ci-grey);
   }
   .trust-line span::before{content:"✓ ";color:var(--ci-accent)}
+  /* desktop: reveal the photography on the right */
+  @media(min-width:900px){
+    .hero{min-height:640px;display:flex;align-items:center;padding-bottom:0}
+    .hero-media{background-position:center 40%}
+    .hero-scrim{background:linear-gradient(100deg,
+      rgba(248,246,243,.98) 0%,rgba(248,246,243,.95) 42%,
+      rgba(248,246,243,.55) 64%,rgba(248,246,243,.05) 86%)}
+    .hero-inner{padding-top:40px;padding-bottom:48px}
+    .trust-line{justify-content:center;max-width:none}
+  }
 </style>
 </head>
 <body class="lattice">
