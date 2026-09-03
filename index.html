@@ -1,0 +1,542 @@
+<!doctype html>
+<html lang="zh-Hans">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>第一次了解福位？从了解到安心，只有 4 步 | Perpetual Memorial Park</title>
+<meta name="description" content="地点、环境、配套和预算 — 我们把第一次了解福位需要知道的事，整理成简单的 4 步。">
+<meta name="theme-color" content="#8A3200">
+<link rel="icon" href="https://www.perpetual.com.my/favicon.ico">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&family=Nunito+Sans:opsz,wght@6..12,300;6..12,400;6..12,600;6..12,700&display=swap" rel="stylesheet">
+<style>
+  /* ====== Perpetual CI tokens (Brand Guidelines 2024) ====== */
+  :root{
+    --ci-accent:#BA4A00;        /* Down to Earth Brown — THE accent */
+    --ci-dark:#8A3200;          /* Honest Brown — dark grounds */
+    --ci-hero:#7A2C00;          /* derived hero ground */
+    --ci-critical:#A33012;      /* Compassion Brown */
+    --ci-yellow-hope:#F4D03F;   /* Hopeful Yellow — accent on dark */
+    --ci-yellow-calm:#F5B041;
+    --ci-yellow-mellow:#EB984E;
+    --ci-grey:#58595B;          /* Progressive Grey */
+    --pmp-ivory:#F8F6F3;
+    --pmp-paper:#FFFFFF;
+    --pmp-line:#E5DDD5;
+    --pmp-ink:#2F2B28;
+    --font-ui:"Avenir Next","Avenir","Nunito Sans","Noto Sans SC","Segoe UI",sans-serif;
+    --shadow-panel:0 7px 22px rgba(47,58,52,.055);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:var(--font-ui);
+    background:var(--pmp-ivory);
+    color:rgba(47,43,40,.9);           /* 90% black — CI rule */
+    font-size:16px;line-height:1.75;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  img{max-width:100%;display:block}
+  a{color:var(--ci-accent)}
+
+  .eyebrow{
+    display:inline-block;
+    font-size:12px;font-weight:700;color:var(--ci-accent);
+    letter-spacing:.35em;text-transform:uppercase;
+  }
+  /* Chinese eyebrows: keep normal-ish tracking (CJK rule) */
+  .eyebrow.zh{letter-spacing:.18em;font-weight:500;font-size:13px}
+
+  .btn{
+    display:inline-flex;align-items:center;justify-content:center;gap:.55em;
+    border-radius:999px;border:1px solid transparent;
+    padding:.95em 1.9em;font-family:var(--font-ui);
+    font-size:15.5px;font-weight:500;line-height:1;letter-spacing:.02em;
+    text-decoration:none;cursor:pointer;
+    transition:background .25s ease,border-color .25s ease,transform .25s ease;
+  }
+  .btn:active{transform:translateY(1px)}
+  .btn-primary{background:var(--ci-accent);color:#fff}
+  .btn-primary:hover{background:var(--ci-dark)}
+  .btn-secondary{background:var(--pmp-paper);color:var(--pmp-ink);border-color:var(--pmp-line)}
+  .btn-secondary:hover{border-color:var(--ci-accent)}
+  .btn .wa{width:19px;height:19px;flex:none}
+
+  /* ================= HERO ================= */
+  .hero{
+    position:relative;isolation:isolate;
+    min-height:100svh;
+    display:flex;flex-direction:column;
+  }
+  .hero-media{
+    position:absolute;inset:0;z-index:-2;
+    background:url("https://cms.perpetual.com.my/assets/images/heng-ding-lou/_banner1920X1078/22010/1920x1080-HDL-04.webp") center 30%/cover no-repeat, var(--ci-hero);
+  }
+  /* warm ivory scrim rising from top+left, deepens at bottom for legibility */
+  .hero-scrim{
+    position:absolute;inset:0;z-index:-1;
+    background:
+      linear-gradient(180deg,rgba(248,246,243,.96) 0%,rgba(248,246,243,.90) 34%,rgba(248,246,243,.55) 58%,rgba(248,246,243,.12) 78%,rgba(122,44,0,.28) 100%);
+  }
+  /* faint Chinese lattice in the scrim */
+  .hero-scrim::after{
+    content:"";position:absolute;inset:0;opacity:.05;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='72' height='72' viewBox='0 0 72 72'%3E%3Cg fill='none' stroke='%238A3200' stroke-width='1'%3E%3Cpath d='M0 36h72M36 0v72M12 12h48v48H12z'/%3E%3Cpath d='M0 0l24 24M72 0L48 24M0 72l24-24M72 72L48 48'/%3E%3C/g%3E%3C/svg%3E");
+    background-size:72px 72px;
+    mask-image:linear-gradient(180deg,#000 55%,transparent 85%);
+    -webkit-mask-image:linear-gradient(180deg,#000 55%,transparent 85%);
+  }
+  .hero-top{
+    padding:22px clamp(20px,6vw,64px) 0;
+  }
+  .hero-top img{width:168px;height:auto;mix-blend-mode:multiply}
+  .hero-body{
+    flex:1;display:flex;flex-direction:column;justify-content:flex-start;
+    padding:clamp(36px,7vh,84px) clamp(20px,6vw,64px) 48px;
+    max-width:640px;
+  }
+  .hero h1{
+    font-weight:500;color:var(--pmp-ink);
+    font-size:clamp(30px,7.6vw,52px);
+    line-height:1.32;letter-spacing:.015em;
+    margin:14px 0 4px;
+  }
+  .hero .sub-head{
+    font-weight:500;color:var(--ci-accent);
+    font-size:clamp(22px,5.4vw,34px);
+    line-height:1.4;letter-spacing:.015em;
+    margin-bottom:18px;
+  }
+  .hero-rule{width:56px;height:2px;background:var(--ci-accent);border:0;margin:2px 0 18px}
+  .hero p.lead{
+    color:rgba(47,43,40,.9);
+    font-size:clamp(15.5px,4vw,17.5px);
+    max-width:30em;margin-bottom:30px;
+  }
+  .hero-ctas{display:flex;flex-direction:column;gap:12px;align-items:stretch;max-width:340px}
+  .hero-note{
+    margin-top:16px;font-size:13px;color:rgba(47,43,40,.82);
+    text-shadow:0 0 14px rgba(248,246,243,.9);
+  }
+  @media(min-width:760px){
+    .hero-ctas{flex-direction:row;align-items:center;max-width:none}
+    .hero-body{justify-content:center;padding-bottom:96px}
+    .hero-scrim{
+      background:
+        linear-gradient(100deg,rgba(248,246,243,.97) 0%,rgba(248,246,243,.93) 38%,rgba(248,246,243,.45) 62%,rgba(248,246,243,0) 82%),
+        linear-gradient(180deg,rgba(248,246,243,.35) 0%,rgba(248,246,243,0) 30%);
+    }
+  }
+
+  /* ============ sections ============ */
+  .section{padding:clamp(56px,10vw,110px) clamp(20px,6vw,64px);max-width:1080px;margin:0 auto}
+
+  /* ============ 4 steps ============ */
+  .step{
+    position:relative;
+    padding:clamp(48px,8vw,84px) 0;
+    border-top:1px solid var(--pmp-line);
+  }
+  .step:first-of-type{border-top:0;padding-top:0}
+  .step-num{
+    font-weight:300;color:var(--ci-yellow-mellow);
+    font-size:clamp(56px,12vw,88px);line-height:1;
+    font-variant-numeric:tabular-nums;
+    margin-bottom:6px;user-select:none;
+  }
+  .step h2{
+    font-weight:500;color:var(--pmp-ink);
+    font-size:clamp(24px,6vw,34px);line-height:1.4;letter-spacing:.015em;
+    margin:6px 0 12px;
+  }
+  .step > p{max-width:34em;margin-bottom:26px}
+  .step .btn{margin-top:26px}
+  .step .em{color:var(--ci-accent);font-weight:500}
+
+  /* fade-up reveal */
+  .reveal{opacity:0;transform:translateY(18px);transition:opacity .7s ease,transform .7s ease}
+  .reveal.in{opacity:1;transform:none}
+  @media (prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}}
+
+  /* selectable chips (locations, budget) */
+  .chips{display:flex;flex-wrap:wrap;gap:10px}
+  .chip{
+    font-family:var(--font-ui);font-size:15px;font-weight:500;
+    color:var(--pmp-ink);background:var(--pmp-paper);
+    border:1px solid var(--pmp-line);border-radius:999px;
+    padding:.8em 1.6em;cursor:pointer;
+    transition:border-color .2s ease,background .2s ease,color .2s ease;
+  }
+  .chip:hover{border-color:var(--ci-accent)}
+  .chip[aria-pressed="true"]{
+    background:var(--ci-accent);border-color:var(--ci-accent);color:#fff;
+  }
+
+  /* image cards (step 2) */
+  .cards{display:grid;gap:16px;grid-template-columns:1fr}
+  @media(min-width:760px){.cards{grid-template-columns:repeat(3,1fr)}}
+  .img-card{
+    background:var(--pmp-paper);border:1px solid var(--pmp-line);
+    border-radius:16px;overflow:hidden;box-shadow:var(--shadow-panel);
+  }
+  .img-card figure{aspect-ratio:4/3;overflow:hidden;margin:0}
+  .img-card img{width:100%;height:100%;object-fit:cover;transition:transform .6s ease}
+  .img-card:hover img{transform:scale(1.04)}
+  .img-card .txt{padding:18px 20px 20px}
+  .img-card h3{font-weight:500;font-size:17px;color:var(--pmp-ink);margin-bottom:4px}
+  .img-card p{font-size:14px;color:var(--ci-grey);line-height:1.7}
+
+  /* simple cards (step 3) */
+  .plain-card{
+    background:var(--pmp-paper);border:1px solid var(--pmp-line);
+    border-radius:16px;box-shadow:var(--shadow-panel);
+    padding:22px 20px;border-left:3px solid var(--pmp-line);
+  }
+  .plain-card.hi{border-left-color:var(--ci-accent)}
+  .plain-card h3{font-weight:500;font-size:17px;color:var(--pmp-ink);margin-bottom:6px}
+  .plain-card p{font-size:14px;color:var(--ci-grey);line-height:1.7}
+
+  /* step 4 budget reveal */
+  .budget-reveal{
+    margin-top:22px;
+    background:var(--pmp-paper);border:1px solid var(--pmp-line);
+    border-radius:16px;box-shadow:var(--shadow-panel);
+    padding:20px 22px;max-width:34em;
+  }
+  .budget-reveal p{font-size:15px}
+  .budget-reveal .btn{
+    margin-top:16px;width:100%;
+    padding-left:.8em;padding-right:.8em;
+    font-size:15px;text-align:center;
+  }
+  @media(min-width:760px){.budget-reveal .btn{width:auto;padding-left:1.9em;padding-right:1.9em}}
+
+  /* ============ reassurance ============ */
+  .reassure{background:var(--pmp-paper);border-top:1px solid var(--pmp-line);border-bottom:1px solid var(--pmp-line)}
+  .reassure .inner{max-width:1080px;margin:0 auto;padding:clamp(56px,10vw,96px) clamp(20px,6vw,64px);text-align:center}
+  .reassure h2{font-weight:500;color:var(--pmp-ink);font-size:clamp(22px,5.6vw,32px);line-height:1.45;margin:8px 0 12px}
+  .reassure .lead{max-width:30em;margin:0 auto 34px;font-size:15.5px}
+  .trust{display:grid;gap:14px;grid-template-columns:1fr;max-width:760px;margin:0 auto}
+  @media(min-width:560px){.trust{grid-template-columns:repeat(3,1fr)}}
+  .trust-item{
+    background:var(--pmp-ivory);border:1px solid var(--pmp-line);border-radius:16px;
+    padding:22px 16px;display:flex;flex-direction:column;align-items:center;gap:10px;
+  }
+  .trust-item svg{width:26px;height:26px;stroke:var(--ci-accent);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+  .trust-item span{font-weight:500;font-size:15px;color:var(--pmp-ink)}
+
+  /* ============ final CTA band ============ */
+  .cta-band{
+    position:relative;isolation:isolate;
+    background:var(--ci-dark);color:rgba(246,241,232,.9);
+    text-align:center;overflow:hidden;
+  }
+  .cta-band::before{
+    content:"";position:absolute;inset:0;z-index:-1;opacity:.07;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='72' height='72' viewBox='0 0 72 72'%3E%3Cg fill='none' stroke='%23F8F6F3' stroke-width='1'%3E%3Cpath d='M0 36h72M36 0v72M12 12h48v48H12z'/%3E%3Cpath d='M0 0l24 24M72 0L48 24M0 72l24-24M72 72L48 48'/%3E%3C/g%3E%3C/svg%3E");
+    background-size:72px 72px;
+  }
+  .cta-band .inner{max-width:640px;margin:0 auto;padding:clamp(60px,11vw,104px) clamp(20px,6vw,64px)}
+  .cta-band h2{font-weight:500;color:#fff;font-size:clamp(23px,5.8vw,33px);line-height:1.45;margin-bottom:12px}
+  .cta-band p{font-size:15.5px;max-width:26em;margin:0 auto 10px}
+  .cta-band .recap{
+    display:none;margin:14px auto 0;font-size:13.5px;
+    color:var(--ci-yellow-hope);letter-spacing:.02em;
+  }
+  .cta-band .recap.show{display:block}
+  .cta-band .btn{margin-top:22px;background:var(--ci-yellow-hope);color:var(--ci-dark);font-weight:700}
+  .cta-band .btn:hover{background:var(--ci-yellow-calm)}
+
+  /* ============ sticky mobile CTA ============ */
+  .sticky-cta{
+    position:fixed;left:0;right:0;bottom:0;z-index:50;
+    background:rgba(248,246,243,.96);backdrop-filter:blur(8px);
+    border-top:1px solid var(--pmp-line);
+    padding:10px 16px calc(10px + env(safe-area-inset-bottom));
+    transform:translateY(110%);transition:transform .35s ease;
+  }
+  .sticky-cta.show{transform:none}
+  .sticky-cta .btn{width:100%;font-size:15px;padding:.85em 1em}
+  @media(min-width:760px){.sticky-cta{display:none}}
+
+  footer{
+    background:var(--ci-hero);color:rgba(246,241,232,.9);
+    padding:34px clamp(20px,6vw,64px);
+    font-size:13.5px;text-align:center;
+  }
+  footer a{color:var(--ci-yellow-hope);text-decoration:none}
+</style>
+</head>
+<body>
+
+<!-- ============ HERO ============ -->
+<header class="hero">
+  <div class="hero-media" role="img" aria-label="Perpetual Memorial Park — 恒定楼中庭"></div>
+  <div class="hero-scrim" aria-hidden="true"></div>
+
+  <div class="hero-top">
+    <img src="assets/Perpetual_Logo_Horizontal.jpg" alt="萬富 Perpetual Memorial Park">
+  </div>
+
+  <div class="hero-body">
+    <span class="eyebrow zh">第一次了解福位？</span>
+    <h1>不用一次看懂<br>所有东西。</h1>
+    <div class="sub-head">先从这 4 步开始。</div>
+    <hr class="hero-rule">
+    <p class="lead">地点、环境、配套和预算，我们整理成简单的方式，让您几分钟先了解清楚。</p>
+
+    <div class="hero-ctas">
+      <a class="btn btn-primary" href="#steps">开始了解 4 个步骤</a>
+      <a class="btn btn-secondary" href="https://wa.me/60182868889?text=%E4%BD%A0%E5%A5%BD%EF%BC%8C%E6%88%91%E6%83%B3%E5%85%88%E4%BA%86%E8%A7%A3%E7%A6%8F%E4%BD%8D" target="_blank" rel="noopener">
+        <svg class="wa" viewBox="0 0 32 32" aria-hidden="true"><path fill="#25D366" d="M16 2.7C8.7 2.7 2.8 8.6 2.8 15.9c0 2.6.8 5 2.1 7.1L2.7 29.3l6.5-2.1c2 1.1 4.3 1.7 6.8 1.7 7.3 0 13.2-5.9 13.2-13.2S23.3 2.7 16 2.7z"/><path fill="#fff" d="M12.1 9.6c-.3-.7-.6-.7-.9-.7h-.8c-.3 0-.7.1-1.1.5s-1.4 1.4-1.4 3.4 1.5 3.9 1.7 4.2c.2.3 2.9 4.6 7.1 6.3 3.5 1.4 4.2 1.1 5 1s2.4-1 2.7-1.9c.3-1 .3-1.8.2-1.9-.1-.2-.4-.3-.8-.5s-2.4-1.2-2.8-1.3c-.4-.1-.6-.2-.9.2-.3.4-1 1.3-1.3 1.6-.2.3-.5.3-.9.1-.4-.2-1.7-.6-3.3-2-1.2-1.1-2-2.4-2.3-2.8-.2-.4 0-.6.2-.8l.6-.7c.2-.2.3-.4.4-.7.1-.3.1-.5 0-.7-.1-.2-.9-2.2-1.2-3z"/></svg>
+        直接 WhatsApp 问我们
+      </a>
+    </div>
+    <p class="hero-note">先了解就好，不会有人催您做决定。</p>
+  </div>
+</header>
+
+<main>
+  <section class="section" id="steps">
+
+    <!-- ============ STEP 01 地点 ============ -->
+    <article class="step reveal" id="step-1">
+      <div class="step-num">01</div>
+      <span class="eyebrow zh">第 1 步 · 地点</span>
+      <h2>先看地点</h2>
+      <p>对大部分家庭来说，第一个问题不是“哪一个最好”，而是<span class="em">以后家人方便来吗？</span></p>
+      <div class="chips" data-group="location" role="group" aria-label="选择地点">
+        <button class="chip" type="button" aria-pressed="false" data-value="Kulai 古来">Kulai 古来</button>
+        <button class="chip" type="button" aria-pressed="false" data-value="Ulu Choh 乌鲁槽">Ulu Choh 乌鲁槽</button>
+        <button class="chip" type="button" aria-pressed="false" data-value="Ipoh 怡保">Ipoh 怡保</button>
+      </div>
+      <a class="btn btn-secondary js-wa" href="#" target="_blank" rel="noopener">查看地点选择</a>
+    </article>
+
+    <!-- ============ STEP 02 环境 ============ -->
+    <article class="step reveal" id="step-2">
+      <div class="step-num">02</div>
+      <span class="eyebrow zh">第 2 步 · 环境</span>
+      <h2>再看看环境</h2>
+      <p>一个长期的选择，不只是看位置。园区规划、环境、维护与整体氛围都值得了解。</p>
+      <div class="cards">
+        <div class="img-card">
+          <figure><img src="https://cms.perpetual.com.my/assets/images/heng-ding-lou/_banner1920X1078/22010/1920x1080-HDL-04.webp" alt="园区规划 — 恒定楼中庭" loading="lazy"></figure>
+          <div class="txt"><h3>园区规划</h3><p>分区清楚，动线舒服，第一次来也不会不知所措。</p></div>
+        </div>
+        <div class="img-card">
+          <figure><img src="https://cms.perpetual.com.my/assets/images/product/plot-img2.jpg" alt="景观环境 — 傍晚的园区" loading="lazy"></figure>
+          <div class="txt"><h3>景观环境</h3><p>开阔的视野与自然景观，安静，而且有生气。</p></div>
+        </div>
+        <div class="img-card">
+          <figure><img src="https://cms.perpetual.com.my/assets/images/heng-ding-lou/_banner1920X1078/22035/1920x1080-HDL-21.webp" alt="长期维护 — 恒定楼大厅" loading="lazy"></figure>
+          <div class="txt"><h3>长期维护</h3><p>有人长期打理。多年以后回来，还是干净、安心。</p></div>
+        </div>
+      </div>
+    </article>
+
+    <!-- ============ STEP 03 配套 ============ -->
+    <article class="step reveal" id="step-3">
+      <div class="step-num">03</div>
+      <span class="eyebrow zh">第 3 步 · 配套</span>
+      <h2>不同选择，差别在哪里？</h2>
+      <p>不同地点、福位类型和配套会有不同选择。</p>
+      <div class="cards">
+        <div class="plain-card hi"><h3>入门选择</h3><p>从基本的福位类型开始了解，适合第一次接触的家庭。</p></div>
+        <div class="plain-card"><h3>家庭规划</h3><p>一家人一起规划，位置相邻，以后祭拜更方便。</p></div>
+        <div class="plain-card"><h3>其他配套</h3><p>骨灰位、土葬福地与相关服务，可以按需要搭配。</p></div>
+      </div>
+      <a class="btn btn-secondary js-wa" href="#" target="_blank" rel="noopener">看看适合我的选择</a>
+    </article>
+
+    <!-- ============ STEP 04 预算 ============ -->
+    <article class="step reveal" id="step-4">
+      <div class="step-num">04</div>
+      <span class="eyebrow zh">第 4 步 · 预算</span>
+      <h2>最后才看预算</h2>
+      <p>预算当然重要，但先知道自己需要什么，价格才比较有意义。</p>
+      <p style="margin-bottom:14px;font-weight:500;color:var(--pmp-ink)">您目前比较想了解哪个预算范围？</p>
+      <div class="chips" data-group="budget" role="group" aria-label="选择预算范围">
+        <button class="chip" type="button" aria-pressed="false" data-value="RM20,000 以下">RM20,000 以下</button>
+        <button class="chip" type="button" aria-pressed="false" data-value="RM20,000 – RM50,000">RM20,000 – RM50,000</button>
+        <button class="chip" type="button" aria-pressed="false" data-value="RM50,000 以上">RM50,000 以上</button>
+        <button class="chip" type="button" aria-pressed="false" data-value="暂时还不确定">暂时还不确定</button>
+      </div>
+      <div class="budget-reveal" id="budget-reveal" hidden>
+        <p>我们可以根据您的预算整理适合的选择。</p>
+        <a class="btn btn-primary js-wa" href="#" target="_blank" rel="noopener">
+          <svg class="wa" viewBox="0 0 32 32" aria-hidden="true"><path fill="#fff" d="M16 2.7C8.7 2.7 2.8 8.6 2.8 15.9c0 2.6.8 5 2.1 7.1L2.7 29.3l6.5-2.1c2 1.1 4.3 1.7 6.8 1.7 7.3 0 13.2-5.9 13.2-13.2S23.3 2.7 16 2.7z"/><path fill="#BA4A00" d="M12.1 9.6c-.3-.7-.6-.7-.9-.7h-.8c-.3 0-.7.1-1.1.5s-1.4 1.4-1.4 3.4 1.5 3.9 1.7 4.2c.2.3 2.9 4.6 7.1 6.3 3.5 1.4 4.2 1.1 5 1s2.4-1 2.7-1.9c.3-1 .3-1.8.2-1.9-.1-.2-.4-.3-.8-.5s-2.4-1.2-2.8-1.3c-.4-.1-.6-.2-.9.2-.3.4-1 1.3-1.3 1.6-.2.3-.5.3-.9.1-.4-.2-1.7-.6-3.3-2-1.2-1.1-2-2.4-2.3-2.8-.2-.4 0-.6.2-.8l.6-.7c.2-.2.3-.4.4-.7.1-.3.1-.5 0-.7-.1-.2-.9-2.2-1.2-3z"/></svg>
+          WhatsApp 看看适合我的福位
+        </a>
+      </div>
+    </article>
+
+  </section>
+
+  <!-- ============ REASSURANCE ============ -->
+  <section class="reassure reveal" id="reassure">
+    <div class="inner">
+      <span class="eyebrow zh">安心了解</span>
+      <h2>先了解，不代表现在就要决定。</h2>
+      <p class="lead">第一次接触这些资讯，会有很多问题很正常。我们可以先提供资料、回答问题，再由您慢慢考虑。</p>
+      <div class="trust">
+        <div class="trust-item">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3h8l4 4v14H7z"/><path d="M15 3v4h4M10 12h6M10 16h6"/></svg>
+          <span>先看资料</span>
+        </div>
+        <div class="trust-item">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7-4.6-9.2-9A5.4 5.4 0 0 1 12 6.6 5.4 5.4 0 0 1 21.2 12C19 16.4 12 21 12 21z"/></svg>
+          <span>没有购买压力</span>
+        </div>
+        <div class="trust-item">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12a8 8 0 0 1-8 8H4l1.6-3.2A8 8 0 1 1 21 12z"/><path d="M9 11h6M9 14h4"/></svg>
+          <span>有问题再询问</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FINAL CTA ============ -->
+  <section class="cta-band" id="final-cta">
+    <div class="inner">
+      <h2>还是不知道该从哪里开始？</h2>
+      <p>告诉我们您想了解的地点和预算，我们帮您把选择整理简单一点。</p>
+      <p class="recap" id="recap"></p>
+      <a class="btn js-wa" href="#" target="_blank" rel="noopener" data-src="final_cta">
+        <svg class="wa" viewBox="0 0 32 32" aria-hidden="true"><path fill="#25D366" d="M16 2.7C8.7 2.7 2.8 8.6 2.8 15.9c0 2.6.8 5 2.1 7.1L2.7 29.3l6.5-2.1c2 1.1 4.3 1.7 6.8 1.7 7.3 0 13.2-5.9 13.2-13.2S23.3 2.7 16 2.7z"/><path fill="#fff" d="M12.1 9.6c-.3-.7-.6-.7-.9-.7h-.8c-.3 0-.7.1-1.1.5s-1.4 1.4-1.4 3.4 1.5 3.9 1.7 4.2c.2.3 2.9 4.6 7.1 6.3 3.5 1.4 4.2 1.1 5 1s2.4-1 2.7-1.9c.3-1 .3-1.8.2-1.9-.1-.2-.4-.3-.8-.5s-2.4-1.2-2.8-1.3c-.4-.1-.6-.2-.9.2-.3.4-1 1.3-1.3 1.6-.2.3-.5.3-.9.1-.4-.2-1.7-.6-3.3-2-1.2-1.1-2-2.4-2.3-2.8-.2-.4 0-.6.2-.8l.6-.7c.2-.2.3-.4.4-.7.1-.3.1-.5 0-.7-.1-.2-.9-2.2-1.2-3z"/></svg>
+        WhatsApp 获取建议
+      </a>
+      <p style="font-size:13px;margin-top:14px;color:rgba(246,241,232,.75)">不用马上决定，先了解清楚再考虑。</p>
+    </div>
+  </section>
+</main>
+
+<!-- ============ STICKY MOBILE CTA ============ -->
+<div class="sticky-cta" id="sticky-cta" aria-hidden="true">
+  <a class="btn btn-primary js-wa" href="#" target="_blank" rel="noopener" data-src="sticky_bar">
+    <svg class="wa" viewBox="0 0 32 32" aria-hidden="true"><path fill="#fff" d="M16 2.7C8.7 2.7 2.8 8.6 2.8 15.9c0 2.6.8 5 2.1 7.1L2.7 29.3l6.5-2.1c2 1.1 4.3 1.7 6.8 1.7 7.3 0 13.2-5.9 13.2-13.2S23.3 2.7 16 2.7z"/><path fill="#BA4A00" d="M12.1 9.6c-.3-.7-.6-.7-.9-.7h-.8c-.3 0-.7.1-1.1.5s-1.4 1.4-1.4 3.4 1.5 3.9 1.7 4.2c.2.3 2.9 4.6 7.1 6.3 3.5 1.4 4.2 1.1 5 1s2.4-1 2.7-1.9c.3-1 .3-1.8.2-1.9-.1-.2-.4-.3-.8-.5s-2.4-1.2-2.8-1.3c-.4-.1-.6-.2-.9.2-.3.4-1 1.3-1.3 1.6-.2.3-.5.3-.9.1-.4-.2-1.7-.6-3.3-2-1.2-1.1-2-2.4-2.3-2.8-.2-.4 0-.6.2-.8l.6-.7c.2-.2.3-.4.4-.7.1-.3.1-.5 0-.7-.1-.2-.9-2.2-1.2-3z"/></svg>
+    WhatsApp 问我们
+  </a>
+</div>
+
+<footer>
+  Perpetual Memorial Park 万富山庄 · Kulai · Ulu Choh · Ipoh<br>
+  <a href="https://www.perpetual.com.my" target="_blank" rel="noopener">perpetual.com.my</a>
+</footer>
+
+<script>
+(function(){
+  var WA_BASE = "https://wa.me/60182868889";
+  var sel = { location:null, budget:null };
+
+  /* ---- tracking: dataLayer always, Meta Pixel when installed ---- */
+  function track(ev, params){
+    params = params || {};
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push(Object.assign({event:ev}, params));
+    if (typeof window.fbq === "function") window.fbq("trackCustom", ev, params);
+  }
+  track("landing_page_view", {page:"4steps"});
+
+  var scroll50Sent = false;
+  window.addEventListener("scroll", function(){
+    if (scroll50Sent) return;
+    var doc = document.documentElement;
+    if (window.scrollY / (doc.scrollHeight - doc.clientHeight) >= .5){
+      scroll50Sent = true; track("scroll_50", {page:"4steps"});
+    }
+  }, {passive:true});
+
+  /* ---- WhatsApp links, personalised by selections ---- */
+  function waMessage(){
+    var msg = "你好，我想先了解福位";
+    if (sel.location) msg += "。地点：" + sel.location;
+    if (sel.budget)   msg += "。预算范围：" + sel.budget;
+    return msg + "。";
+  }
+  function updateLinks(){
+    var url = WA_BASE + "?text=" + encodeURIComponent(waMessage());
+    document.querySelectorAll(".js-wa, .hero-ctas .btn-secondary").forEach(function(a){ a.href = url; });
+    var recap = document.getElementById("recap");
+    if (recap){
+      var bits = [];
+      if (sel.location) bits.push("地点：" + sel.location);
+      if (sel.budget)   bits.push("预算：" + sel.budget);
+      recap.textContent = bits.length ? "您的选择 — " + bits.join(" · ") : "";
+      recap.classList.toggle("show", bits.length > 0);
+    }
+  }
+  document.querySelectorAll("a[href*='wa.me']").forEach(function(a){
+    a.addEventListener("click", function(){
+      track("whatsapp_click", {
+        page:"4steps",
+        source: a.dataset.src || (a.closest(".hero") ? "hero" : a.closest(".budget-reveal") ? "budget_reveal" : "step_cta"),
+        location: sel.location || "", budget: sel.budget || ""
+      });
+    });
+  });
+
+  /* ---- selectable chips ---- */
+  document.querySelectorAll(".chips").forEach(function(group){
+    var key = group.dataset.group;
+    group.addEventListener("click", function(e){
+      var chip = e.target.closest(".chip");
+      if (!chip) return;
+      var on = chip.getAttribute("aria-pressed") === "true";
+      group.querySelectorAll(".chip").forEach(function(c){ c.setAttribute("aria-pressed","false"); });
+      chip.setAttribute("aria-pressed", on ? "false" : "true");
+      sel[key] = on ? null : chip.dataset.value;
+      if (key === "budget"){
+        document.getElementById("budget-reveal").hidden = (sel.budget === null);
+      }
+      if (sel[key]) track(key === "location" ? "location_selected" : "budget_selected",
+                          {page:"4steps", value: sel[key]});
+      updateLinks();
+    });
+  });
+
+  /* ---- reveal on scroll ---- */
+  var io = ("IntersectionObserver" in window)
+    ? new IntersectionObserver(function(entries){
+        entries.forEach(function(en){
+          if (en.isIntersecting){ en.target.classList.add("in"); io.unobserve(en.target); }
+        });
+      }, { threshold:.05 })
+    : null;
+  document.querySelectorAll(".reveal").forEach(function(el){
+    if (io) io.observe(el); else el.classList.add("in");
+  });
+  // fail-safe: anything at or above the viewport is always revealed
+  function sweepReveals(){
+    document.querySelectorAll(".reveal:not(.in)").forEach(function(el){
+      if (el.getBoundingClientRect().top < window.innerHeight) el.classList.add("in");
+    });
+  }
+  window.addEventListener("scroll", sweepReveals, {passive:true});
+  window.addEventListener("load", sweepReveals);
+
+  /* ---- sticky mobile CTA: appears after hero, hides at final CTA ---- */
+  var sticky = document.getElementById("sticky-cta");
+  var hero = document.querySelector(".hero");
+  var band = document.getElementById("final-cta");
+  var pastHero = false, atBand = false;
+  function syncSticky(){
+    var show = pastHero && !atBand;
+    sticky.classList.toggle("show", show);
+    sticky.setAttribute("aria-hidden", show ? "false" : "true");
+  }
+  if ("IntersectionObserver" in window){
+    new IntersectionObserver(function(en){ pastHero = !en[0].isIntersecting; syncSticky(); },
+      {threshold:.05}).observe(hero);
+    new IntersectionObserver(function(en){ atBand = en[0].isIntersecting; syncSticky(); },
+      {threshold:.2}).observe(band);
+  }
+
+  updateLinks();
+})();
+</script>
+
+</body>
+</html>
