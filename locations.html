@@ -82,7 +82,7 @@
         <div class="txt">
           <h3>Ulu Choh 乌鲁槽</h3>
           <p class="env">环境开阔宁静的传统园区，设有多区骨灰位选择，氛围安静朴实。</p>
-          <p class="suit"><strong>可能适合：</strong>偏好安静传统园区氛围、注重性价比的家庭。</p>
+          <p class="suit"><strong>可能适合：</strong>偏好安静、传统园区氛围的家庭。</p>
           <a class="btn btn-secondary js-loc" href="#" target="_blank" rel="noopener" data-loc="Ulu Choh 乌鲁槽">了解 Ulu Choh</a>
         </div>
       </div>
@@ -90,7 +90,7 @@
         <figure><img src="https://cms.perpetual.com.my/assets/images/product/_card800X560/16079/ningxiangge-05.webp" alt="Ipoh 怡保 — 宁祥阁" loading="lazy"></figure>
         <div class="txt">
           <h3>Ipoh 怡保</h3>
-          <p class="env">位于霹雳怡保，同时提供骨灰位与户外福地，靠山环境开阔。</p>
+          <p class="env">位于霹雳怡保，同时提供骨灰位与户外福地，环境开阔。</p>
           <p class="suit"><strong>可能适合：</strong>家人在霹雳或北部地区，希望就近探访的家庭。</p>
           <a class="btn btn-secondary js-loc" href="#" target="_blank" rel="noopener" data-loc="Ipoh 怡保">了解 Ipoh</a>
         </div>
@@ -106,7 +106,7 @@
         <thead><tr><th></th><th>Kulai 古来</th><th>Ulu Choh 乌鲁槽</th><th>Ipoh 怡保</th></tr></thead>
         <tbody>
           <tr><th>距离</th><td>柔佛古来，靠近新山与新加坡</td><td>柔佛西南部，环境清幽</td><td>霹雳怡保，方便北部家庭</td></tr>
-          <tr><th>环境</th><td>现代规划，室内外兼备</td><td>开阔宁静，传统氛围</td><td>靠山开阔，绿意环绕</td></tr>
+          <tr><th>环境</th><td>现代规划，室内外兼备</td><td>开阔宁静，传统氛围</td><td>环境开阔，绿意环绕</td></tr>
           <tr><th>可选择配套</th><td>骨灰位 · 土葬福地</td><td>骨灰位</td><td>骨灰位 · 土葬福地</td></tr>
           <tr><th>预算</th><td colspan="3">视福位类型与配套而定 — 告诉我们您的预算，我们帮您整理适合的选择。</td></tr>
         </tbody>
@@ -186,7 +186,7 @@
 
   /* per-location CTAs open WhatsApp about that park */
   document.querySelectorAll(".js-loc").forEach(function(a){
-    a.href = PMP.WA_BASE + "?text=" + encodeURIComponent("您好，我想了解 " + a.dataset.loc + " 的福位。");
+    a.href = PMP.WA_BASE + "?text=" + encodeURIComponent(PMP.tagMessage("您好，我想了解 " + a.dataset.loc + " 的福位。", PAGE));
     a.addEventListener("click", function(){
       PMP.track("location_selected", {page_type:PAGE, location:a.dataset.loc});
       PMP.track("whatsapp_click", {page_type:PAGE, source:"location_card", location:a.dataset.loc});

@@ -114,9 +114,23 @@ window.PMP = (function(){
     sync();
   }
 
+  /* ---- lead-source reference code appended to WhatsApp messages ----
+     Format: [编号 PR-campaign-creative] — lets care consultants (and any
+     CRM export of chats) attribute every conversation to page + campaign. */
+  var PAGE_CODE = { price:"PR", matcher:"MT", locations:"LC", "4steps":"ST", guide:"GD" };
+  function refCode(page){
+    var parts = [PAGE_CODE[page] || (page || "LP").slice(0,2).toUpperCase()];
+    if (utm.utm_campaign) parts.push(String(utm.utm_campaign).replace(/[^\w-]/g,"").slice(0,18));
+    if (utm.utm_content)  parts.push(String(utm.utm_content).replace(/[^\w-]/g,"").slice(0,14));
+    return parts.join("-");
+  }
+  function tagMessage(message, page){
+    return message + "\n\n[编号 " + refCode(page) + "]";
+  }
+
   /* ---- WhatsApp links: set message on all .js-wa, wire click tracking ---- */
   function setWA(message, page){
-    var url = WA_BASE + "?text=" + encodeURIComponent(message);
+    var url = WA_BASE + "?text=" + encodeURIComponent(tagMessage(message, page));
     document.querySelectorAll(".js-wa").forEach(function(a){ a.href = url; });
     return url;
   }
@@ -144,7 +158,7 @@ window.PMP = (function(){
     });
   }
 
-  return { WA_BASE:WA_BASE, utm:utm, track:track, setWA:setWA,
+  return { WA_BASE:WA_BASE, utm:utm, track:track, setWA:setWA, tagMessage:tagMessage, refCode:refCode,
            initScrollDepth:initScrollDepth, initReveal:initReveal, initSticky:initSticky,
            initWAClicks:initWAClicks, initChips:initChips, decorateLinks:decorateLinks };
 })();
