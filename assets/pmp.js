@@ -1,6 +1,37 @@
 /* Perpetual lead-gen pages — shared behaviour: tracking, UTM, sticky, reveal */
+
+/* ==== TRACKING CONFIG — fill in when IDs are approved; leave "" to disable ==== */
+window.PMP_CONFIG = window.PMP_CONFIG || {
+  META_PIXEL_ID: "",        /* e.g. "1234567890" — Meta Pixel base code auto-injects when set */
+  GA4_MEASUREMENT_ID: ""    /* e.g. "G-XXXXXXX"  — GA4 gtag.js auto-injects when set */
+};
+
 window.PMP = (function(){
   var WA_BASE = "https://wa.me/60182868889";
+
+  /* ---- inject Meta Pixel / GA4 base code when IDs are configured ---- */
+  (function initVendors(){
+    var c = window.PMP_CONFIG;
+    if (c.META_PIXEL_ID && typeof window.fbq !== "function"){
+      !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+      n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+      n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+      t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+      document,'script','https://connect.facebook.net/en_US/fbevents.js');
+      window.fbq('init', c.META_PIXEL_ID);
+      window.fbq('track', 'PageView');
+    }
+    if (c.GA4_MEASUREMENT_ID && typeof window.gtag !== "function"){
+      var s = document.createElement("script");
+      s.async = true;
+      s.src = "https://www.googletagmanager.com/gtag/js?id=" + c.GA4_MEASUREMENT_ID;
+      document.head.appendChild(s);
+      window.dataLayer = window.dataLayer || [];
+      window.gtag = function(){ window.dataLayer.push(arguments); };
+      window.gtag("js", new Date());
+      window.gtag("config", c.GA4_MEASUREMENT_ID);
+    }
+  })();
 
   /* ---- Meta/GA campaign params: capture once, persist for the session ---- */
   var KEYS = ["utm_source","utm_medium","utm_campaign","utm_content","utm_term","fbclid","gclid"];
@@ -15,7 +46,7 @@ window.PMP = (function(){
   /* preserve UTMs on internal page links */
   function decorateLinks(){
     if (!Object.keys(utm).length) return;
-    document.querySelectorAll('a[href$=".html"], a[href="./"], a[href="/"]').forEach(function(a){
+    document.querySelectorAll('a[href*=".html"], a[href="./"], a[href="/"]').forEach(function(a){
       try{
         var u = new URL(a.getAttribute("href"), location.href);
         if (u.origin !== location.origin) return;
@@ -28,6 +59,8 @@ window.PMP = (function(){
   /* ---- event hook: dataLayer always; Meta Pixel + GA4 when installed ---- */
   function track(ev, params){
     params = Object.assign({}, utm, params || {});
+    if (utm.utm_campaign && !params.campaign) params.campaign = utm.utm_campaign;
+    if (utm.utm_content  && !params.creative) params.creative = utm.utm_content;
     window.dataLayer = window.dataLayer || [];
     window.dataLayer.push(Object.assign({event:ev}, params));
     if (typeof window.fbq === "function") window.fbq("trackCustom", ev, params);
@@ -41,7 +74,7 @@ window.PMP = (function(){
       if (sent) return;
       var d = document.documentElement;
       if (window.scrollY / (d.scrollHeight - d.clientHeight) >= .5){
-        sent = true; track("scroll_50", {page:page});
+        sent = true; track("scroll_50", {page_type:page});
       }
     }, {passive:true});
   }

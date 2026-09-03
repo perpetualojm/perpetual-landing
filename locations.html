@@ -121,19 +121,20 @@
 
   <section class="cta-band" id="final-cta">
     <div class="inner">
-      <h2>还不知道怎么选？</h2>
-      <p style="max-width:26em;margin:0 auto">告诉我们您住在哪里，我们从距离和需求开始，帮您比较。</p>
-      <div class="chips" data-group="home" role="group" aria-label="您住在哪里"
+      <h2>哪个园区，对家人以后比较方便？</h2>
+      <p style="max-width:26em;margin:0 auto">选择您或家人目前所在地区，我们可以从距离和实际需求开始比较。</p>
+      <div class="chips" data-group="home" role="group" aria-label="您或家人所在地区"
            style="justify-content:center;margin-top:20px">
+        <button class="chip" type="button" aria-pressed="false" data-value="Johor Bahru">Johor Bahru</button>
+        <button class="chip" type="button" aria-pressed="false" data-value="Singapore">Singapore</button>
         <button class="chip" type="button" aria-pressed="false" data-value="Kuala Lumpur">Kuala Lumpur</button>
-        <button class="chip" type="button" aria-pressed="false" data-value="Johor">Johor</button>
         <button class="chip" type="button" aria-pressed="false" data-value="Perak">Perak</button>
         <button class="chip" type="button" aria-pressed="false" data-value="Penang">Penang</button>
         <button class="chip" type="button" aria-pressed="false" data-value="其他">其他</button>
       </div>
       <a class="btn btn-yellow js-wa" href="#" target="_blank" rel="noopener" data-src="final_cta" style="margin-top:24px">
         <svg class="wa" viewBox="0 0 32 32" aria-hidden="true"><path fill="#25D366" d="M16 2.7C8.7 2.7 2.8 8.6 2.8 15.9c0 2.6.8 5 2.1 7.1L2.7 29.3l6.5-2.1c2 1.1 4.3 1.7 6.8 1.7 7.3 0 13.2-5.9 13.2-13.2S23.3 2.7 16 2.7z"/><path fill="#fff" d="M12.1 9.6c-.3-.7-.6-.7-.9-.7h-.8c-.3 0-.7.1-1.1.5s-1.4 1.4-1.4 3.4 1.5 3.9 1.7 4.2c.2.3 2.9 4.6 7.1 6.3 3.5 1.4 4.2 1.1 5 1s2.4-1 2.7-1.9c.3-1 .3-1.8.2-1.9-.1-.2-.4-.3-.8-.5s-2.4-1.2-2.8-1.3c-.4-.1-.6-.2-.9.2-.3.4-1 1.3-1.3 1.6-.2.3-.5.3-.9.1-.4-.2-1.7-.6-3.3-2-1.2-1.1-2-2.4-2.3-2.8-.2-.4 0-.6.2-.8l.6-.7c.2-.2.3-.4.4-.7.1-.3.1-.5 0-.7-.1-.2-.9-2.2-1.2-3z"/></svg>
-        WhatsApp 帮我比较地点
+        帮我比较适合的园区 →
       </a>
       <p style="font-size:13px;margin-top:14px;color:rgba(246,241,232,.75)">不用马上决定，先了解清楚再考虑。</p>
     </div>
@@ -158,34 +159,35 @@
   var PAGE = "locations";
   var sel = { home:null };
   function message(){
-    var m = "您好，我想比较福位的地点。";
-    if (sel.home) m += "\n我住在：" + sel.home;
+    var m = "您好，我刚看了园区比较。";
+    if (sel.home) m += "\n家人主要在 " + sel.home + "。";
+    m += "\n想了解哪个 Perpetual 园区比较方便。";
     return m;
   }
   function refresh(){ PMP.setWA(message(), PAGE); }
 
   /* generic wa tracking first (js-loc excluded: hrefs not yet set) */
-  PMP.initWAClicks(PAGE, function(){ return {home: sel.home || ""}; });
+  PMP.initWAClicks(PAGE, function(){ return {page_type:PAGE, home: sel.home || ""}; });
 
   /* per-location CTAs open WhatsApp about that park */
   document.querySelectorAll(".js-loc").forEach(function(a){
     a.href = PMP.WA_BASE + "?text=" + encodeURIComponent("您好，我想了解 " + a.dataset.loc + " 的福位。");
     a.addEventListener("click", function(){
-      PMP.track("location_selected", {page:PAGE, value:a.dataset.loc});
-      PMP.track("whatsapp_click", {page:PAGE, source:"location_card", location:a.dataset.loc});
+      PMP.track("location_selected", {page_type:PAGE, location:a.dataset.loc});
+      PMP.track("whatsapp_click", {page_type:PAGE, source:"location_card", location:a.dataset.loc});
     });
   });
 
   PMP.initChips(function(key, val){
     sel[key] = val;
-    if (val) PMP.track("home_state_selected", {page:PAGE, value:val});
+    if (val) PMP.track("home_state_selected", {page_type:PAGE, value:val});
     refresh();
   });
   PMP.initReveal();
   PMP.initScrollDepth(PAGE);
   PMP.initSticky(document.querySelector(".hero"), document.getElementById("final-cta"));
   PMP.decorateLinks();
-  PMP.track("landing_page_view", {page:PAGE});
+  PMP.track("landing_page_view", {page_type:PAGE});
   refresh();
 })();
 </script>
