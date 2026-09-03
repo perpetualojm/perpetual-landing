@@ -94,3 +94,26 @@ a{color:var(--ci-accent)}
 .cta-band h2{font-weight:500;color:#fff;font-size:clamp(22px,5.6vw,31px);line-height:1.45;margin-bottom:12px}
 
 .logo-h{width:168px;height:auto;mix-blend-mode:multiply}
+
+/* FAQ accordion */
+.faq{max-width:640px}
+.faq details{
+  background:var(--pmp-paper);border:1px solid var(--pmp-line);border-radius:14px;
+  box-shadow:var(--shadow-panel);margin-bottom:10px;overflow:hidden;
+}
+.faq summary{
+  list-style:none;cursor:pointer;padding:16px 18px;
+  font-weight:500;font-size:15px;color:var(--pmp-ink);
+  display:flex;justify-content:space-between;align-items:center;gap:12px;
+  -webkit-tap-highlight-color:transparent;
+}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"＋";color:var(--ci-accent);font-size:16px;flex:none;transition:transform .25s ease}
+.faq details[open] summary::after{transform:rotate(45deg)}
+.faq details p{padding:0 18px 16px;font-size:14px;color:var(--ci-grey);line-height:1.75}
+
+/* small environment photo band */
+.env-band{display:grid;gap:12px;grid-template-columns:repeat(3,1fr)}
+.env-band figure{margin:0;border-radius:14px;overflow:hidden;border:1px solid var(--pmp-line);box-shadow:var(--shadow-panel);background:var(--pmp-paper)}
+.env-band img{width:100%;aspect-ratio:1/1.1;object-fit:cover}
+.env-band figcaption{font-size:12px;color:var(--ci-grey);text-align:center;padding:8px 4px;background:var(--pmp-paper)}
