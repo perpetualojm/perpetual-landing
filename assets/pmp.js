@@ -57,8 +57,11 @@ window.PMP = (function(){
   }
 
   /* ---- event hook: dataLayer always; Meta Pixel + GA4 when installed ---- */
+  var currentPage = "";
   function track(ev, params){
     params = Object.assign({}, utm, params || {});
+    if (params.page_type) currentPage = params.page_type;
+    else if (currentPage) params.page_type = currentPage;
     if (utm.utm_campaign && !params.campaign) params.campaign = utm.utm_campaign;
     if (utm.utm_content  && !params.creative) params.creative = utm.utm_content;
     window.dataLayer = window.dataLayer || [];
@@ -66,6 +69,22 @@ window.PMP = (function(){
     if (typeof window.fbq === "function") window.fbq("trackCustom", ev, params);
     if (typeof window.gtag === "function") window.gtag("event", ev, params);
   }
+
+  /* ---- global click stream: every button/link/summary tap ---- */
+  document.addEventListener("click", function(e){
+    var el = e.target.closest("a, button, summary");
+    if (!el) return;
+    var cls = String(el.className || "");
+    track("button_click", {
+      label: (el.textContent || "").trim().replace(/\s+/g, " ").slice(0, 40),
+      kind: cls.indexOf("chip") > -1 ? "chip"
+          : cls.indexOf("opt")  > -1 ? "option"
+          : el.tagName === "SUMMARY"  ? "faq"
+          : cls.indexOf("btn")  > -1 ? "cta"
+          : el.tagName.toLowerCase(),
+      href: el.tagName === "A" ? (el.getAttribute("href") || "").slice(0, 60) : ""
+    });
+  }, true);
 
   /* ---- scroll_50, once ---- */
   function initScrollDepth(page){
