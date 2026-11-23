@@ -38,7 +38,8 @@ window.PMP = (function(){
       window.dataLayer = window.dataLayer || [];
       window.gtag = function(){ window.dataLayer.push(arguments); };
       window.gtag("js", new Date());
-      window.gtag("config", c.GA4_MEASUREMENT_ID, TEST ? {traffic_type: "internal"} : {});
+      if (TEST) window.gtag("set", {traffic_type: "internal"});   /* every Google id this tag feeds, not only this one */
+      window.gtag("config", c.GA4_MEASUREMENT_ID);
     }
   })();
 
