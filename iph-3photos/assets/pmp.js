@@ -11,12 +11,26 @@ window.PMP = (function(){
 
   /* ---- ?test=1 marks this tab as a test visit (2026-11-23): no GA4, no Meta pixel, no Google Ads tag is loaded, so no
      test reaches them; page-track.js and the booking form read the same flag. Kept for the tab in sessionStorage. ---- */
-  var TEST = false;
+  var TEST = false, TQ = false;
+  try { TQ = new URLSearchParams(location.search).get("test") === "1"; } catch(e){}
   try {
-    if (/(^|[?&])test=1(&|$)/.test(location.search.slice(1))) sessionStorage.setItem("pmp_test", "1");
-    TEST = sessionStorage.getItem("pmp_test") === "1";
-  } catch(e){ TEST = /(^|[?&])test=1(&|$)/.test(location.search.slice(1)); }
+    if (TQ) sessionStorage.setItem("pmp_test", "1");
+    TEST = TQ || sessionStorage.getItem("pmp_test") === "1";
+  } catch(e){ TEST = TQ; }
   window.PMP_TEST = TEST;
+
+  /* a utm value that looks like an e-mail or a phone number (an "@", or 9+ digits anywhere) never goes to GA4 / Meta */
+  function unsafe(v){ v = String(v); return /@/.test(v) || (v.match(/\d/g) || []).length >= 9; }
+  function cleanUrl(href){
+    if (!href) return href;
+    try {
+      var u = new URL(href), ks = [];
+      u.searchParams.forEach(function(v, k){ if (k.toLowerCase().indexOf("utm_") === 0 && unsafe(v) && ks.indexOf(k) < 0) ks.push(k); });
+      if (!ks.length) return href;
+      ks.forEach(function(k){ u.searchParams.delete(k); });
+      return u.href;
+    } catch(e){ return href; }
+  }
 
   /* ---- inject Meta Pixel / GA4 base code when IDs are configured ---- */
   (function initVendors(){
@@ -39,21 +53,15 @@ window.PMP = (function(){
       window.dataLayer = window.dataLayer || [];
       window.gtag = function(){ window.dataLayer.push(arguments); };
       window.gtag("js", new Date());
-      var cfg = {};
-      try {
-        var pl = new URL(location.href), cut = false;
-        ["utm_source","utm_medium","utm_campaign","utm_content","utm_term"].forEach(function(k){
-          var v = pl.searchParams.get(k);
-          if (v && (/@/.test(v) || /\d{7,}/.test(v))){ pl.searchParams.delete(k); cut = true; }
-        });
-        if (cut) cfg.page_location = pl.href;
-      } catch(e){}
+      var cfg = {}, pl = cleanUrl(location.href), pr = cleanUrl(document.referrer);
+      if (pl !== location.href) cfg.page_location = pl;
+      if (document.referrer && pr !== document.referrer) cfg.page_referrer = pr;
       window.gtag("config", c.GA4_MEASUREMENT_ID, cfg);
     }
   })();
 
   /* ---- Meta/GA campaign params: capture once, persist for the session ---- */
-  var KEYS = ["utm_source","utm_medium","utm_campaign","utm_content","utm_term","fbclid","gclid"];
+  var KEYS = ["utm_source","utm_medium","utm_campaign","utm_content","utm_term","utm_id","fbclid","gclid","gbraid","wbraid"];
   var utm = {};
   try{
     var q = new URLSearchParams(location.search);
@@ -65,11 +73,12 @@ window.PMP = (function(){
   /* preserve UTMs on internal page links */
   function decorateLinks(){
     if (!Object.keys(utm).length) return;
+    var su = safeUtm();
     document.querySelectorAll('a[href*=".html"], a[href="./"], a[href="/"]').forEach(function(a){
       try{
         var u = new URL(a.getAttribute("href"), location.href);
         if (u.origin !== location.origin) return;
-        KEYS.forEach(function(k){ if (utm[k] && !u.searchParams.get(k)) u.searchParams.set(k, utm[k]); });
+        KEYS.forEach(function(k){ if (su[k] && !u.searchParams.get(k)) u.searchParams.set(k, su[k]); });
         a.href = u.pathname + u.search + u.hash;
       }catch(e){}
     });
@@ -82,17 +91,18 @@ window.PMP = (function(){
     var o = {};
     for (var k in utm){
       var v = String(utm[k]);
-      if (k.indexOf("utm_") === 0 && (/@/.test(v) || /\d{7,}/.test(v))) continue;
-      o[k] = v.slice(0, 100);
+      if (k.indexOf("utm_") === 0){ if (unsafe(v)) continue; v = v.slice(0, 100); }
+      o[k] = v;
     }
     return o;
   }
   function track(ev, params){
-    params = Object.assign({}, safeUtm(), params || {});
+    var su = safeUtm();
+    params = Object.assign({}, su, params || {});
     if (params.page_type) currentPage = params.page_type;
     else if (currentPage) params.page_type = currentPage;
-    if (utm.utm_campaign && !params.campaign) params.campaign = utm.utm_campaign;
-    if (utm.utm_content  && !params.creative) params.creative = utm.utm_content;
+    if (su.utm_campaign && !params.campaign) params.campaign = su.utm_campaign;
+    if (su.utm_content  && !params.creative) params.creative = su.utm_content;
     window.dataLayer = window.dataLayer || [];
     window.dataLayer.push(Object.assign({event:ev}, params));
     if (typeof window.fbq === "function") window.fbq("trackCustom", ev, params);
