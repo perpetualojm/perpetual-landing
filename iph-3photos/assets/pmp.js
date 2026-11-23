@@ -19,8 +19,20 @@ window.PMP = (function(){
   } catch(e){ TEST = TQ; }
   window.PMP_TEST = TEST;
 
-  /* a utm value that looks like an e-mail or a phone number (an "@", or 9+ digits anywhere) never goes to GA4 / Meta */
-  function unsafe(v){ v = String(v); return /@/.test(v) || (v.match(/\d/g) || []).length >= 9; }
+  /* a utm value that looks like an e-mail or a phone number never goes to GA4 / Meta: an "@", a Malaysian mobile number
+     anywhere, or a value of only digits and phone punctuation with 9-13 digits that starts with + / 0 / 6.
+     Numeric campaign or ad ids (2026112301, 120212345678901234) are kept. */
+  function unsafe(v){
+    v = String(v).trim();
+    var n = (v.match(/\d/g) || []).length;
+    return /@/.test(v)
+      || /(^|[^\d])(\+?6?01\d)[\s-]?\d{3,4}[\s-]?\d{4}([^\d]|$)/.test(v)
+      || (/^[+0-9\s().-]+$/.test(v) && n >= 9 && n <= 13 && /^[+(]?\s*[06]/.test(v));
+  }
+  function safeHref(h){
+    try { var a = new URL(h, location.href); if (cleanUrl(a.href) !== a.href) return h.split("?")[0]; } catch(e){}
+    return h;
+  }
   function cleanUrl(href){
     if (!href) return href;
     try {
@@ -121,7 +133,7 @@ window.PMP = (function(){
           : el.tagName === "SUMMARY"  ? "faq"
           : cls.indexOf("btn")  > -1 ? "cta"
           : el.tagName.toLowerCase(),
-      href: el.tagName === "A" ? (el.getAttribute("href") || "").slice(0, 60) : ""
+      href: el.tagName === "A" ? safeHref(el.getAttribute("href") || "").slice(0, 60) : ""
     });
   }, true);
 
