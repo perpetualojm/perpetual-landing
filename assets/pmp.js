@@ -3,11 +3,20 @@
 /* ==== TRACKING CONFIG — fill in when IDs are approved; leave "" to disable ==== */
 window.PMP_CONFIG = window.PMP_CONFIG || {
   META_PIXEL_ID: "543241923632489",  /* Meta Pixel — base code auto-injects */
-  GA4_MEASUREMENT_ID: ""    /* e.g. "G-XXXXXXX"  — GA4 gtag.js auto-injects when set */
+  GA4_MEASUREMENT_ID: "G-X9YCKWQQGX"    /* GA4 (2026-11-23, Telegram 18283): page_view + whatsapp_click, same id as the Kulai page */
 };
 
 window.PMP = (function(){
   var WA_BASE = "https://wa.me/60182868889";
+
+  /* ---- ?test=1 marks this tab as a test visit (2026-11-23): GA4 gets traffic_type=internal so a GA4 data filter
+     can drop it; page-track.js and the booking form read the same flag. Kept for the tab in sessionStorage. ---- */
+  var TEST = false;
+  try {
+    if (/(^|[?&])test=1(&|$)/.test(location.search.slice(1))) sessionStorage.setItem("pmp_test", "1");
+    TEST = sessionStorage.getItem("pmp_test") === "1";
+  } catch(e){ TEST = /(^|[?&])test=1(&|$)/.test(location.search.slice(1)); }
+  window.PMP_TEST = TEST;
 
   /* ---- inject Meta Pixel / GA4 base code when IDs are configured ---- */
   (function initVendors(){
@@ -29,7 +38,7 @@ window.PMP = (function(){
       window.dataLayer = window.dataLayer || [];
       window.gtag = function(){ window.dataLayer.push(arguments); };
       window.gtag("js", new Date());
-      window.gtag("config", c.GA4_MEASUREMENT_ID);
+      window.gtag("config", c.GA4_MEASUREMENT_ID, TEST ? {traffic_type: "internal"} : {});
     }
   })();
 
@@ -177,7 +186,7 @@ window.PMP = (function(){
     });
   }
 
-  return { WA_BASE:WA_BASE, utm:utm, track:track, setWA:setWA, tagMessage:tagMessage, refCode:refCode,
+  return { WA_BASE:WA_BASE, utm:utm, test:TEST, track:track, setWA:setWA, tagMessage:tagMessage, refCode:refCode,
            initScrollDepth:initScrollDepth, initReveal:initReveal, initSticky:initSticky,
            initWAClicks:initWAClicks, initChips:initChips, decorateLinks:decorateLinks };
 })();
