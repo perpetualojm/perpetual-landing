@@ -9,8 +9,8 @@ window.PMP_CONFIG = window.PMP_CONFIG || {
 window.PMP = (function(){
   var WA_BASE = "https://wa.me/60182868889";
 
-  /* ---- ?test=1 marks this tab as a test visit (2026-11-23): GA4 gets traffic_type=internal so a GA4 data filter
-     can drop it; page-track.js and the booking form read the same flag. Kept for the tab in sessionStorage. ---- */
+  /* ---- ?test=1 marks this tab as a test visit (2026-11-23): no GA4, no Meta pixel, no Google Ads tag is loaded, so no
+     test reaches them; page-track.js and the booking form read the same flag. Kept for the tab in sessionStorage. ---- */
   var TEST = false;
   try {
     if (/(^|[?&])test=1(&|$)/.test(location.search.slice(1))) sessionStorage.setItem("pmp_test", "1");
@@ -21,6 +21,7 @@ window.PMP = (function(){
   /* ---- inject Meta Pixel / GA4 base code when IDs are configured ---- */
   (function initVendors(){
     var c = window.PMP_CONFIG;
+    if (TEST) return;
     if (c.META_PIXEL_ID && typeof window.fbq !== "function"){
       !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
       n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
@@ -38,8 +39,16 @@ window.PMP = (function(){
       window.dataLayer = window.dataLayer || [];
       window.gtag = function(){ window.dataLayer.push(arguments); };
       window.gtag("js", new Date());
-      if (TEST) window.gtag("set", {traffic_type: "internal"});   /* every Google id this tag feeds, not only this one */
-      window.gtag("config", c.GA4_MEASUREMENT_ID);
+      var cfg = {};
+      try {
+        var pl = new URL(location.href), cut = false;
+        ["utm_source","utm_medium","utm_campaign","utm_content","utm_term"].forEach(function(k){
+          var v = pl.searchParams.get(k);
+          if (v && (/@/.test(v) || /\d{7,}/.test(v))){ pl.searchParams.delete(k); cut = true; }
+        });
+        if (cut) cfg.page_location = pl.href;
+      } catch(e){}
+      window.gtag("config", c.GA4_MEASUREMENT_ID, cfg);
     }
   })();
 
@@ -68,8 +77,18 @@ window.PMP = (function(){
 
   /* ---- event hook: dataLayer always; Meta Pixel + GA4 when installed ---- */
   var currentPage = "";
+  /* utm values that look like an e-mail or a phone number never go to GA4 / Meta (2026-11-23) */
+  function safeUtm(){
+    var o = {};
+    for (var k in utm){
+      var v = String(utm[k]);
+      if (k.indexOf("utm_") === 0 && (/@/.test(v) || /\d{7,}/.test(v))) continue;
+      o[k] = v.slice(0, 100);
+    }
+    return o;
+  }
   function track(ev, params){
-    params = Object.assign({}, utm, params || {});
+    params = Object.assign({}, safeUtm(), params || {});
     if (params.page_type) currentPage = params.page_type;
     else if (currentPage) params.page_type = currentPage;
     if (utm.utm_campaign && !params.campaign) params.campaign = utm.utm_campaign;
